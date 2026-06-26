@@ -274,20 +274,20 @@ export default function App() {
   const isFireAlert = flameActiveCount > 0;
 
   return (
-    <div className={`min-h-screen flex flex-col font-sans transition-colors duration-300 ${
+    <div className={`min-h-screen md:h-screen md:overflow-hidden flex flex-col font-sans transition-colors duration-300 ${
       theme === "dark" 
         ? "dark bg-[#0b0f19] text-slate-300" 
         : "bg-gradient-to-br from-indigo-50/15 via-slate-50/30 to-sky-50/15 text-slate-600"
     }`}>
       {/* Dynamic Header */}
-      <header className="bg-slate-900 text-white py-4 px-6 sticky top-0 z-50 flex items-center justify-between border-b border-slate-800 shadow-md">
+      <header className="bg-[#0b0f19]/90 backdrop-blur-md text-white py-4.5 px-6 sticky top-0 z-50 flex items-center justify-between border-b border-slate-800/60 shadow-lg shadow-indigo-950/5">
         <div className="flex items-center gap-3">
-          <div className={`p-2 rounded-xl ${isFireAlert ? "bg-red-600 animate-pulse" : "bg-indigo-600"}`}>
+          <div className={`p-2.5 rounded-xl shadow-glow-indigo transition-all duration-300 ${isFireAlert ? "bg-red-650 animate-pulse shadow-glow-red" : "bg-indigo-600"}`}>
             <Flame className="h-5 w-5 text-white" />
           </div>
           <div>
-            <h1 className="text-base font-extrabold tracking-tight">IIT ANOMALY DETECTION</h1>
-            <p className="text-[10px] font-semibold text-slate-400 uppercase tracking-wider">IoT Fire Safety & Monitoring Gateway</p>
+            <h1 className="text-base font-extrabold tracking-tight bg-gradient-to-r from-white via-slate-100 to-indigo-200 bg-clip-text text-transparent">IIT ANOMALY DETECTION</h1>
+            <p className="text-[10px] font-bold text-indigo-300/80 uppercase tracking-wider font-mono">IoT Fire Safety & Monitoring Gateway</p>
           </div>
         </div>
 
@@ -319,9 +319,9 @@ export default function App() {
         </div>
       </header>
 
-      <div className="flex-1 flex flex-col md:flex-row">
+      <div className="flex-1 flex flex-col md:flex-row min-h-0">
         {/* Navigation Sidebar */}
-        <aside className="w-full md:w-64 bg-white border-r border-slate-100 dark:border-slate-800 flex flex-col p-4 shrink-0 shadow-sm transition-all duration-300">
+        <aside className="w-full md:w-64 bg-white dark:bg-[#0d1423]/60 border-r border-slate-100 dark:border-slate-800/80 flex flex-col p-4 shrink-0 shadow-sm transition-all duration-300 md:overflow-y-auto">
           
           {/* Sidebar Header with Theme Toggle */}
           <div className="pb-4 mb-4 border-b border-slate-100 dark:border-slate-800/60 flex items-center justify-between">
@@ -367,8 +367,8 @@ export default function App() {
               onClick={() => setActiveTab("dashboard")}
               className={`w-full flex items-center gap-3 px-4 py-3 rounded-xl text-xs font-bold transition duration-150 cursor-pointer ${
                 activeTab === "dashboard"
-                  ? "bg-indigo-50 text-indigo-700 font-extrabold shadow-sm"
-                  : "text-slate-500 hover:bg-slate-50 hover:text-slate-800"
+                  ? "bg-indigo-50 text-indigo-700 dark:bg-indigo-950/45 dark:text-indigo-400 font-extrabold shadow-sm"
+                  : "text-slate-500 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-900/60 hover:text-slate-800 dark:hover:text-slate-200"
               }`}
             >
               <LayoutDashboard className="h-4.5 w-4.5 shrink-0" />
@@ -383,8 +383,8 @@ export default function App() {
               onClick={() => setActiveTab("monitoring")}
               className={`w-full flex items-center gap-3 px-4 py-3 rounded-xl text-xs font-bold transition duration-150 cursor-pointer ${
                 activeTab === "monitoring"
-                  ? "bg-indigo-50 text-indigo-700 font-extrabold shadow-sm"
-                  : "text-slate-500 hover:bg-slate-50 hover:text-slate-800"
+                  ? "bg-indigo-50 text-indigo-700 dark:bg-indigo-950/45 dark:text-indigo-400 font-extrabold shadow-sm"
+                  : "text-slate-500 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-900/60 hover:text-slate-800 dark:hover:text-slate-200"
               }`}
             >
               <LineChart className="h-4.5 w-4.5 shrink-0" />
@@ -396,14 +396,14 @@ export default function App() {
               onClick={() => setActiveTab("pump")}
               className={`w-full flex items-center gap-3 px-4 py-3 rounded-xl text-xs font-bold transition duration-150 cursor-pointer ${
                 activeTab === "pump"
-                  ? "bg-indigo-50 text-indigo-700 font-extrabold shadow-sm"
-                  : "text-slate-500 hover:bg-slate-50 hover:text-slate-800"
+                  ? "bg-indigo-50 text-indigo-700 dark:bg-indigo-950/45 dark:text-indigo-400 font-extrabold shadow-sm"
+                  : "text-slate-500 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-900/60 hover:text-slate-800 dark:hover:text-slate-200"
               }`}
             >
               <Power className="h-4.5 w-4.5 shrink-0" />
               <span>Pump & Sprinkler Actuator</span>
               {state.pumpStatus === "ON" && (
-                <span className="ml-auto text-[10px] px-1.5 py-0.5 bg-blue-100 text-blue-700 font-extrabold rounded">
+                <span className="ml-auto text-[10px] px-1.5 py-0.5 bg-blue-100 dark:bg-blue-950/40 text-blue-700 dark:text-blue-400 font-extrabold rounded">
                   ON
                 </span>
               )}
@@ -414,8 +414,8 @@ export default function App() {
               onClick={() => setActiveTab("alerts")}
               className={`w-full flex items-center gap-3 px-4 py-3 rounded-xl text-xs font-bold transition duration-150 cursor-pointer ${
                 activeTab === "alerts"
-                  ? "bg-indigo-50 text-indigo-700 font-extrabold shadow-sm"
-                  : "text-slate-500 hover:bg-slate-50 hover:text-slate-800"
+                  ? "bg-indigo-50 text-indigo-700 dark:bg-indigo-950/45 dark:text-indigo-400 font-extrabold shadow-sm"
+                  : "text-slate-500 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-900/60 hover:text-slate-800 dark:hover:text-slate-200"
               }`}
             >
               <AlertTriangle className="h-4.5 w-4.5 shrink-0" />
@@ -432,8 +432,8 @@ export default function App() {
               onClick={() => setActiveTab("email")}
               className={`w-full flex items-center gap-3 px-4 py-3 rounded-xl text-xs font-bold transition duration-150 cursor-pointer ${
                 activeTab === "email"
-                  ? "bg-indigo-50 text-indigo-700 font-extrabold shadow-sm"
-                  : "text-slate-500 hover:bg-slate-50 hover:text-slate-800"
+                  ? "bg-indigo-50 text-indigo-700 dark:bg-indigo-950/45 dark:text-indigo-400 font-extrabold shadow-sm"
+                  : "text-slate-500 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-900/60 hover:text-slate-800 dark:hover:text-slate-200"
               }`}
             >
               <Mail className="h-4.5 w-4.5 shrink-0" />
@@ -442,19 +442,19 @@ export default function App() {
           </div>
 
           {/* Connection Status Footprint */}
-          <div className="pt-4 mt-4 border-t border-slate-100 space-y-2">
-            <div className="flex items-center gap-2 p-2 bg-slate-50 rounded-xl border border-slate-100">
+          <div className="pt-4 mt-4 border-t border-slate-100 dark:border-slate-800/60 space-y-2">
+            <div className="flex items-center gap-2 p-2 bg-slate-50 dark:bg-slate-900/40 rounded-xl border border-slate-100 dark:border-slate-800/60">
               <span className={`w-2 h-2 bg-emerald-500 rounded-full ${isFirebaseMode ? "animate-pulse" : ""}`} />
               <div className="min-w-0">
-                <p className="text-[10px] font-bold text-slate-400 uppercase tracking-wider">Telemetry Link</p>
-                <p className="text-[11px] font-bold text-slate-700 truncate">
+                <p className="text-[10px] font-bold text-slate-400 dark:text-slate-500 uppercase tracking-wider">Telemetry Link</p>
+                <p className="text-[11px] font-bold text-slate-700 dark:text-slate-350 truncate">
                   {isFirebaseMode ? "Firebase RTDB" : "Stateful Simulation"}
                 </p>
               </div>
             </div>
             
             {state.firebaseConfigured && (
-              <div className="flex items-center gap-1 text-[10px] text-indigo-600 bg-indigo-50/50 p-2 rounded-lg font-mono truncate">
+              <div className="flex items-center gap-1 text-[10px] text-indigo-600 dark:text-indigo-400 bg-indigo-50/50 dark:bg-indigo-950/25 p-2 rounded-lg font-mono truncate">
                 <Database className="h-3 w-3" />
                 Firebase Active
               </div>

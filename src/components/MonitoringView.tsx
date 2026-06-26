@@ -197,17 +197,17 @@ export default function MonitoringView({
   return (
     <div className="space-y-6" id="monitoring-container">
       {/* Real-time DB Configuration Control Panel */}
-      <div className="bg-white rounded-2xl shadow-sm border border-slate-100 p-5 flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4" id="db-config-panel">
+      <div className="bg-white dark:bg-[#0d1423]/60 rounded-2xl shadow-sm border border-slate-100 dark:border-slate-800/80 p-5 flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4" id="db-config-panel">
         <div>
-          <h2 className="text-lg font-bold text-slate-800 flex items-center gap-2">
+          <h2 className="text-lg font-bold text-slate-800 dark:text-white flex items-center gap-2 font-display">
             <Database className="h-5 w-5 text-indigo-500" />
             Backend Connection Engine
           </h2>
-          <p className="text-xs text-slate-400 mt-1 max-w-xl">
+          <p className="text-xs text-slate-400 dark:text-slate-500 mt-1 max-w-xl">
             Choose whether to pull real-time telemetry from the stateful local memory simulator or sync live to a connected Google Firebase Realtime Database.
           </p>
           {firebaseConfigured && (
-            <p className="text-xs font-mono text-indigo-600 bg-indigo-50 px-2 py-1 rounded mt-2 inline-block">
+            <p className="text-xs font-mono text-indigo-600 dark:text-indigo-400 bg-indigo-50 dark:bg-indigo-950/40 px-2 py-1 rounded mt-2 inline-block">
               Connected RTDB URL: {firebaseUrl}
             </p>
           )}
@@ -215,13 +215,13 @@ export default function MonitoringView({
 
         <div className="flex flex-wrap items-center gap-3">
           {/* Data Source Toggles */}
-          <div className="bg-slate-100 p-1 rounded-xl flex items-center">
+          <div className="bg-slate-100 dark:bg-slate-900/60 p-1 rounded-xl flex items-center border border-slate-200/25 dark:border-slate-800/60">
             <button
               onClick={() => onToggleFirebaseMode(false)}
               className={`px-3 py-1.5 rounded-lg text-xs font-bold transition duration-150 cursor-pointer ${
                 !isFirebaseMode
-                  ? "bg-white text-slate-800 shadow-sm"
-                  : "text-slate-500 hover:text-slate-700"
+                  ? "bg-white dark:bg-slate-850 text-slate-800 dark:text-white shadow-sm"
+                  : "text-slate-500 dark:text-slate-400 hover:text-slate-700 dark:hover:text-slate-200"
               }`}
             >
               Simulated Node
@@ -238,7 +238,7 @@ export default function MonitoringView({
               className={`px-3 py-1.5 rounded-lg text-xs font-bold transition duration-150 cursor-pointer flex items-center gap-1 ${
                 isFirebaseMode
                   ? "bg-indigo-600 text-white shadow-sm"
-                  : "text-slate-500 hover:text-slate-700"
+                  : "text-slate-500 dark:text-slate-400 hover:text-slate-700 dark:hover:text-slate-200"
               }`}
             >
               <Radio className="h-3.5 w-3.5" />
@@ -249,7 +249,7 @@ export default function MonitoringView({
           <button
             onClick={onRefresh}
             disabled={isLoading}
-            className="p-2 bg-slate-100 hover:bg-slate-200 disabled:opacity-50 text-slate-600 rounded-xl transition duration-150 cursor-pointer flex items-center justify-center gap-1.5 text-xs font-bold"
+            className="p-2 bg-slate-100 hover:bg-slate-200 dark:bg-slate-900/60 dark:hover:bg-slate-800 disabled:opacity-50 text-slate-600 dark:text-slate-400 rounded-xl transition duration-150 cursor-pointer flex items-center justify-center gap-1.5 text-xs font-bold border border-slate-200/10 dark:border-slate-800/40"
             id="btn-refresh"
           >
             <RefreshCw className={`h-4 w-4 ${isLoading ? "animate-spin" : ""}`} />
@@ -260,17 +260,17 @@ export default function MonitoringView({
 
       {/* Telemetry Statistical Insights */}
       <div className="space-y-4" id="telemetry-stats-panel">
-        <div className="flex items-center justify-between border-b border-slate-100 pb-2">
+        <div className="flex items-center justify-between border-b border-slate-100 dark:border-slate-800/50 pb-2">
           <div>
-            <h3 className="text-sm font-extrabold text-slate-800 flex items-center gap-1.5 uppercase tracking-wider">
+            <h3 className="text-sm font-extrabold text-slate-800 dark:text-white flex items-center gap-1.5 uppercase tracking-wider font-display">
               <Sparkles className="h-4.5 w-4.5 text-indigo-500" />
               Environmental Stats & Buffer Metrics
             </h3>
-            <p className="text-[11px] text-slate-400">
+            <p className="text-[11px] text-slate-400 dark:text-slate-500">
               Live mathematical aggregation of sensor records pulled from the database.
             </p>
           </div>
-          <span className="text-[10px] font-mono bg-slate-100 text-slate-600 px-2 py-0.5 rounded font-bold">
+          <span className="text-[10px] font-mono bg-slate-100 dark:bg-slate-800/80 text-slate-600 dark:text-slate-400 px-2 py-0.5 rounded font-bold border border-slate-200/10 dark:border-slate-800/40">
             BUFFER SIZE: {sensorHistory?.length || 0} ITEMS
           </span>
         </div>
@@ -278,15 +278,15 @@ export default function MonitoringView({
         {/* Bento Stat Cards */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
           {/* Card 1: Mean Temperature & Direction */}
-          <div className="bg-white rounded-2xl p-4 border border-slate-100 shadow-sm flex flex-col justify-between hover:border-slate-200/80 transition duration-150">
+          <div className="bg-white dark:bg-[#0d1423]/60 rounded-2xl p-4 border border-slate-100 dark:border-slate-800/80 shadow-sm flex flex-col justify-between hover:border-slate-200/80 dark:hover:border-slate-700/80 transition duration-150">
             <div className="flex items-start justify-between">
               <div>
-                <span className="text-[10px] font-extrabold text-slate-400 uppercase tracking-wider">Mean Temp</span>
-                <div className="text-2xl font-black text-slate-800 mt-1">
+                <span className="text-[10px] font-extrabold text-slate-400 dark:text-slate-500 uppercase tracking-wider">Mean Temp</span>
+                <div className="text-2xl font-black text-slate-800 dark:text-white mt-1 font-mono">
                   {stats.avgTemp.toFixed(1)}°C
                 </div>
               </div>
-              <div className={`p-2 rounded-xl ${stats.trend === "Rising" ? "bg-red-50 text-red-500" : stats.trend === "Falling" ? "bg-emerald-50 text-emerald-500" : "bg-slate-50 text-slate-400"}`}>
+              <div className={`p-2 rounded-xl ${stats.trend === "Rising" ? "bg-red-50 dark:bg-red-950/40 text-red-500" : stats.trend === "Falling" ? "bg-emerald-50 dark:bg-emerald-950/40 text-emerald-500" : "bg-slate-50 dark:bg-slate-900/40 text-slate-400 dark:text-slate-500"}`}>
                 {stats.trend === "Rising" ? (
                   <TrendingUp className="h-5 w-5 animate-bounce" />
                 ) : stats.trend === "Falling" ? (
@@ -296,62 +296,62 @@ export default function MonitoringView({
                 )}
               </div>
             </div>
-            <div className="mt-3 text-[10px] text-slate-400 flex items-center gap-1">
+            <div className="mt-3 text-[10px] text-slate-400 dark:text-slate-500 flex items-center gap-1">
               <span className="font-bold text-slate-500 uppercase">Peak:</span>
-              <span className="font-semibold text-slate-600">{stats.peakTemp.toFixed(1)}°C ({stats.peakTempSensor})</span>
+              <span className="font-semibold text-slate-600 dark:text-slate-400">{stats.peakTemp.toFixed(1)}°C ({stats.peakTempSensor})</span>
             </div>
           </div>
 
           {/* Card 2: Mean Humidity & Dryness */}
-          <div className="bg-white rounded-2xl p-4 border border-slate-100 shadow-sm flex flex-col justify-between hover:border-slate-200/80 transition duration-150">
+          <div className="bg-white dark:bg-[#0d1423]/60 rounded-2xl p-4 border border-slate-100 dark:border-slate-800/80 shadow-sm flex flex-col justify-between hover:border-slate-200/80 dark:hover:border-slate-700/80 transition duration-150">
             <div className="flex items-start justify-between">
               <div>
-                <span className="text-[10px] font-extrabold text-slate-400 uppercase tracking-wider">Mean Humidity</span>
-                <div className="text-2xl font-black text-slate-800 mt-1">
+                <span className="text-[10px] font-extrabold text-slate-400 dark:text-slate-500 uppercase tracking-wider">Mean Humidity</span>
+                <div className="text-2xl font-black text-slate-800 dark:text-white mt-1 font-mono">
                   {stats.avgHum.toFixed(1)}%
                 </div>
               </div>
-              <div className="p-2 bg-sky-50 text-sky-500 rounded-xl">
+              <div className="p-2 bg-sky-50 dark:bg-sky-950/40 text-sky-500 dark:text-sky-400 rounded-xl">
                 <Droplets className="h-5 w-5" />
               </div>
             </div>
-            <div className="mt-3 text-[10px] text-slate-400 flex items-center gap-1">
+            <div className="mt-3 text-[10px] text-slate-400 dark:text-slate-500 flex items-center gap-1">
               <span className="font-bold text-slate-500 uppercase">Min:</span>
-              <span className="font-semibold text-slate-600">{stats.minHum.toFixed(1)}% ({stats.minHumSensor})</span>
+              <span className="font-semibold text-slate-600 dark:text-slate-400">{stats.minHum.toFixed(1)}% ({stats.minHumSensor})</span>
             </div>
           </div>
 
           {/* Card 3: Instability / Standard Deviation */}
-          <div className="bg-white rounded-2xl p-4 border border-slate-100 shadow-sm flex flex-col justify-between hover:border-slate-200/80 transition duration-150">
+          <div className="bg-white dark:bg-[#0d1423]/60 rounded-2xl p-4 border border-slate-100 dark:border-slate-800/80 shadow-sm flex flex-col justify-between hover:border-slate-200/80 dark:hover:border-slate-700/80 transition duration-150">
             <div className="flex items-start justify-between">
               <div>
-                <span className="text-[10px] font-extrabold text-slate-400 uppercase tracking-wider">Thermal Variance</span>
-                <div className="text-2xl font-black text-slate-800 mt-1">
+                <span className="text-[10px] font-extrabold text-slate-400 dark:text-slate-500 uppercase tracking-wider">Thermal Variance</span>
+                <div className="text-2xl font-black text-slate-800 dark:text-white mt-1 font-mono">
                   ±{stats.tempStdDev.toFixed(2)}
                 </div>
               </div>
-              <div className="p-2 bg-indigo-50 text-indigo-500 rounded-xl">
+              <div className="p-2 bg-indigo-50 dark:bg-indigo-950/40 text-indigo-500 dark:text-indigo-400 rounded-xl">
                 <BarChart3 className="h-5 w-5" />
               </div>
             </div>
-            <div className="mt-3 text-[10px] text-slate-400 flex items-center gap-1">
+            <div className="mt-3 text-[10px] text-slate-400 dark:text-slate-500 flex items-center gap-1">
               <span className="font-bold text-slate-500 uppercase">Stdev Score:</span>
-              <span className="font-semibold text-slate-600">
+              <span className="font-semibold text-slate-600 dark:text-slate-400">
                 {stats.tempStdDev > 3 ? "Highly Fluctuate" : "Stable Distribution"}
               </span>
             </div>
           </div>
 
           {/* Card 4: Fire Catalyst Index */}
-          <div className="bg-white rounded-2xl p-4 border border-slate-100 shadow-sm flex flex-col justify-between hover:border-slate-200/80 transition duration-150 relative overflow-hidden">
+          <div className="bg-white dark:bg-[#0d1423]/60 rounded-2xl p-4 border border-slate-100 dark:border-slate-800/80 shadow-sm flex flex-col justify-between hover:border-slate-200/80 dark:hover:border-slate-700/80 transition duration-150 relative overflow-hidden">
             {/* Catalyst background pulse */}
             {stats.fireCatalystLabel === "High" && (
-              <div className="absolute inset-0 bg-red-500/5 animate-pulse" />
+              <div className="absolute inset-0 bg-red-500/5 dark:bg-red-500/10 animate-pulse" />
             )}
             <div className="flex items-start justify-between relative z-10">
               <div>
-                <span className="text-[10px] font-extrabold text-slate-400 uppercase tracking-wider">Aridity-Thermal Score</span>
-                <div className="text-2xl font-black text-slate-800 mt-1">
+                <span className="text-[10px] font-extrabold text-slate-400 dark:text-slate-500 uppercase tracking-wider">Aridity-Thermal Score</span>
+                <div className="text-2xl font-black text-slate-800 dark:text-white mt-1 font-mono">
                   {stats.fireCatalystScore}%
                 </div>
               </div>
@@ -365,7 +365,7 @@ export default function MonitoringView({
                 <Flame className="h-5 w-5" />
               </div>
             </div>
-            <div className="mt-3 text-[10px] text-slate-400 flex items-center gap-1.5 relative z-10">
+            <div className="mt-3 text-[10px] text-slate-400 dark:text-slate-500 flex items-center gap-1.5 relative z-10">
               <span className="font-bold text-slate-500 uppercase">Threat Level:</span>
               <span className={`font-extrabold uppercase ${
                 stats.fireCatalystLabel === "High" 
@@ -384,9 +384,9 @@ export default function MonitoringView({
         {sensorHistory && sensorHistory.length > 0 ? (
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
             {/* Widget A: Environmental Correlation Over Time */}
-            <div className="bg-white rounded-2xl shadow-sm border border-slate-100 p-6">
-              <div className="flex items-center gap-2 mb-4 border-b border-slate-50 pb-3">
-                <div className="p-2 bg-indigo-50 text-indigo-600 rounded-lg">
+            <div className="bg-white dark:bg-[#0d1423]/60 rounded-2xl shadow-sm border border-slate-100 dark:border-slate-800 p-6">
+              <div className="flex items-center gap-2 mb-4 border-b border-slate-50 dark:border-slate-800/40 pb-3">
+                <div className="p-2 bg-indigo-50 dark:bg-indigo-950/40 text-indigo-600 dark:text-indigo-400 rounded-lg">
                   <Activity className="h-5 w-5" />
                 </div>
                 <div>
@@ -423,25 +423,25 @@ export default function MonitoringView({
             </div>
 
             {/* Widget B: Sensor Extremes Bar Chart */}
-            <div className="bg-white rounded-2xl shadow-sm border border-slate-100 p-6">
-              <div className="flex items-center gap-2 mb-4 border-b border-slate-50 pb-3">
-                <div className="p-2 bg-pink-50 text-pink-600 rounded-lg">
+            <div className="bg-white dark:bg-[#0d1423]/60 rounded-2xl shadow-sm border border-slate-100 dark:border-slate-800 p-6">
+              <div className="flex items-center gap-2 mb-4 border-b border-slate-50 dark:border-slate-800/40 pb-3">
+                <div className="p-2 bg-pink-50 dark:bg-pink-950/40 text-pink-600 dark:text-pink-400 rounded-lg">
                   <BarChart3 className="h-5 w-5" />
                 </div>
                 <div>
-                  <h3 className="font-bold text-slate-800 text-sm">Spatial Peak & Minimum Comparison</h3>
-                  <p className="text-xs text-slate-400">Extreme limits registered across classroom sensors</p>
+                  <h3 className="font-bold text-slate-800 dark:text-white text-sm font-display">Spatial Peak & Minimum Comparison</h3>
+                  <p className="text-xs text-slate-400 dark:text-slate-500">Extreme limits registered across classroom sensors</p>
                 </div>
               </div>
               <div className="w-full h-64">
                 <ResponsiveContainer width="100%" height="100%">
                   <BarChart data={sensorCompareData} margin={{ top: 10, right: 10, left: -20, bottom: 0 }}>
-                    <CartesianGrid strokeDasharray="3 3" stroke="#f1f5f9" />
+                    <CartesianGrid strokeDasharray="3 3" stroke="var(--chart-grid)" />
                     <XAxis dataKey="sensor" stroke="#94a3b8" fontSize={10} tickLine={false} />
                     <YAxis stroke="#94a3b8" fontSize={10} tickLine={false} />
                     <Tooltip
-                      contentStyle={{ backgroundColor: "#ffffff", borderRadius: "12px", border: "1px solid #e2e8f0" }}
-                      labelStyle={{ fontWeight: "bold", fontSize: "11px", color: "#1e293b" }}
+                      contentStyle={{ backgroundColor: "var(--tooltip-bg)", borderRadius: "12px", border: "1px solid var(--tooltip-border)" }}
+                      labelStyle={{ fontWeight: "bold", fontSize: "11px", color: "var(--tooltip-color)" }}
                     />
                     <Legend iconSize={10} wrapperStyle={{ fontSize: "10px", fontWeight: "bold" }} />
                     <Bar dataKey="Max Temp" fill="#f43f5e" radius={[4, 4, 0, 0]} barSize={16} />
@@ -462,26 +462,26 @@ export default function MonitoringView({
       {/* Recharts Analytics Section */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6" id="charts-grid">
         {/* Temperature History Chart */}
-        <div className="bg-white rounded-2xl shadow-sm border border-slate-100 p-6">
-          <div className="flex items-center gap-2 mb-4 border-b border-slate-50 pb-3">
-            <div className="p-2 bg-indigo-50 text-indigo-600 rounded-lg">
+        <div className="bg-white dark:bg-[#0d1423]/60 rounded-2xl shadow-sm border border-slate-100 dark:border-slate-800 p-6">
+          <div className="flex items-center gap-2 mb-4 border-b border-slate-50 dark:border-slate-800/40 pb-3">
+            <div className="p-2 bg-indigo-50 dark:bg-indigo-950/40 text-indigo-600 dark:text-indigo-400 rounded-lg">
               <Thermometer className="h-5 w-5" />
             </div>
             <div>
-              <h3 className="font-bold text-slate-800 text-sm">Temperature History (°C)</h3>
-              <p className="text-xs text-slate-400">DHT22 Readings (Interval: 3s)</p>
+              <h3 className="font-bold text-slate-800 dark:text-white text-sm font-display">Temperature History (°C)</h3>
+              <p className="text-xs text-slate-400 dark:text-slate-500">DHT22 Readings (Interval: 3s)</p>
             </div>
           </div>
           <div className="w-full h-80" id="temp-chart-wrapper">
             {sensorHistory && sensorHistory.length > 0 ? (
               <ResponsiveContainer width="100%" height="100%">
                 <LineChart data={sensorHistory} margin={{ top: 5, right: 10, left: -20, bottom: 0 }}>
-                  <CartesianGrid strokeDasharray="3 3" stroke="#f1f5f9" />
+                  <CartesianGrid strokeDasharray="3 3" stroke="var(--chart-grid)" />
                   <XAxis dataKey="time" stroke="#94a3b8" fontSize={10} tickLine={false} />
                   <YAxis stroke="#94a3b8" fontSize={10} domain={[15, "auto"]} tickLine={false} />
                   <Tooltip
-                    contentStyle={{ backgroundColor: "#ffffff", borderRadius: "12px", border: "1px solid #e2e8f0" }}
-                    labelStyle={{ fontWeight: "bold", fontSize: "11px", color: "#1e293b" }}
+                    contentStyle={{ backgroundColor: "var(--tooltip-bg)", borderRadius: "12px", border: "1px solid var(--tooltip-border)" }}
+                    labelStyle={{ fontWeight: "bold", fontSize: "11px", color: "var(--tooltip-color)" }}
                   />
                   <Legend iconSize={10} wrapperStyle={{ fontSize: "10px", fontWeight: "bold" }} />
                   <Line type="monotone" dataKey="Back Wall L Temp" stroke="#6366f1" strokeWidth={2} dot={false} activeDot={{ r: 4 }} />
@@ -491,32 +491,32 @@ export default function MonitoringView({
                 </LineChart>
               </ResponsiveContainer>
             ) : (
-              <div className="h-full flex items-center justify-center text-slate-400 text-xs">Waiting for telemetry buffer...</div>
+              <div className="h-full flex items-center justify-center text-slate-400 dark:text-slate-500 text-xs">Waiting for telemetry buffer...</div>
             )}
           </div>
         </div>
 
         {/* Humidity History Chart */}
-        <div className="bg-white rounded-2xl shadow-sm border border-slate-100 p-6">
-          <div className="flex items-center gap-2 mb-4 border-b border-slate-50 pb-3">
-            <div className="p-2 bg-sky-50 text-sky-600 rounded-lg">
+        <div className="bg-white dark:bg-[#0d1423]/60 rounded-2xl shadow-sm border border-slate-100 dark:border-slate-800 p-6">
+          <div className="flex items-center gap-2 mb-4 border-b border-slate-50 dark:border-slate-800/40 pb-3">
+            <div className="p-2 bg-sky-50 dark:bg-sky-950/40 text-sky-600 dark:text-sky-400 rounded-lg">
               <Droplets className="h-5 w-5" />
             </div>
             <div>
-              <h3 className="font-bold text-slate-800 text-sm">Humidity History (%)</h3>
-              <p className="text-xs text-slate-400">DHT22 Moisture Data Buffer</p>
+              <h3 className="font-bold text-slate-800 dark:text-white text-sm font-display">Humidity History (%)</h3>
+              <p className="text-xs text-slate-400 dark:text-slate-500">DHT22 Moisture Data Buffer</p>
             </div>
           </div>
           <div className="w-full h-80" id="humidity-chart-wrapper">
             {sensorHistory && sensorHistory.length > 0 ? (
               <ResponsiveContainer width="100%" height="100%">
                 <LineChart data={sensorHistory} margin={{ top: 5, right: 10, left: -20, bottom: 0 }}>
-                  <CartesianGrid strokeDasharray="3 3" stroke="#f1f5f9" />
+                  <CartesianGrid strokeDasharray="3 3" stroke="var(--chart-grid)" />
                   <XAxis dataKey="time" stroke="#94a3b8" fontSize={10} tickLine={false} />
                   <YAxis stroke="#94a3b8" fontSize={10} domain={[5, 100]} tickLine={false} />
                   <Tooltip
-                    contentStyle={{ backgroundColor: "#ffffff", borderRadius: "12px", border: "1px solid #e2e8f0" }}
-                    labelStyle={{ fontWeight: "bold", fontSize: "11px", color: "#1e293b" }}
+                    contentStyle={{ backgroundColor: "var(--tooltip-bg)", borderRadius: "12px", border: "1px solid var(--tooltip-border)" }}
+                    labelStyle={{ fontWeight: "bold", fontSize: "11px", color: "var(--tooltip-color)" }}
                   />
                   <Legend iconSize={10} wrapperStyle={{ fontSize: "10px", fontWeight: "bold" }} />
                   <Line type="monotone" dataKey="Back Wall L Hum" stroke="#3b82f6" strokeWidth={2} dot={false} activeDot={{ r: 4 }} />
@@ -526,15 +526,15 @@ export default function MonitoringView({
                 </LineChart>
               </ResponsiveContainer>
             ) : (
-              <div className="h-full flex items-center justify-center text-slate-400 text-xs">Waiting for telemetry buffer...</div>
+              <div className="h-full flex items-center justify-center text-slate-400 dark:text-slate-500 text-xs">Waiting for telemetry buffer...</div>
             )}
           </div>
         </div>
       </div>
 
       {/* Flame Sensor Matrix */}
-      <div className="bg-white rounded-2xl shadow-sm border border-slate-100 p-6" id="flame-sensor-matrix">
-        <h3 className="text-sm font-bold text-slate-800 mb-4 flex items-center gap-1.5">
+      <div className="bg-white dark:bg-[#0d1423]/60 rounded-2xl shadow-sm border border-slate-100 dark:border-slate-800 p-6" id="flame-sensor-matrix">
+        <h3 className="text-sm font-bold text-slate-800 dark:text-white mb-4 flex items-center gap-1.5 font-display">
           <Flame className="h-4.5 w-4.5 text-red-500 animate-pulse" />
           Flame Sensor Arrays
         </h3>
@@ -548,24 +548,24 @@ export default function MonitoringView({
                 key={room.id}
                 className={`p-4 rounded-xl border flex flex-col justify-between h-28 relative overflow-hidden transition-all duration-200 ${
                   isFlame
-                    ? "bg-red-50/50 border-red-200 ring-1 ring-red-500/10"
-                    : "bg-slate-50/40 border-slate-100"
+                    ? "bg-red-50/50 dark:bg-red-950/20 border-red-200 dark:border-red-900/40 ring-1 ring-red-500/10"
+                    : "bg-slate-50/40 dark:bg-slate-900/40 border-slate-100 dark:border-slate-800/80"
                 }`}
               >
                 <div>
-                  <h4 className="text-xs font-bold text-slate-400 uppercase tracking-wider">{room.name}</h4>
-                  <p className="text-[10px] text-slate-400 font-mono mt-0.5">Sensor ID: FS_{room.id.toUpperCase()}</p>
+                  <h4 className="text-xs font-bold text-slate-400 dark:text-slate-500 uppercase tracking-wider">{room.name}</h4>
+                  <p className="text-[10px] text-slate-400 dark:text-slate-500 font-mono mt-0.5">Sensor ID: FS_{room.id.toUpperCase()}</p>
                 </div>
 
                 <div className="flex items-center justify-between mt-4">
                   <div className="flex items-center gap-1.5">
                     <span className={`w-2.5 h-2.5 rounded-full ${isFlame ? "bg-red-500 animate-ping" : "bg-emerald-500"}`} />
-                    <span className={`text-xs font-bold ${isFlame ? "text-red-600 animate-pulse" : "text-emerald-600"}`}>
+                    <span className={`text-xs font-bold ${isFlame ? "text-red-600 dark:text-red-400 animate-pulse" : "text-emerald-600 dark:text-emerald-400"}`}>
                       {isFlame ? "FIRE ALARM" : "SAFE / CLEAR"}
                     </span>
                   </div>
 
-                  <div className={`p-1.5 rounded-lg ${isFlame ? "bg-red-100 text-red-600" : "bg-emerald-100 text-emerald-600"}`}>
+                  <div className={`p-1.5 rounded-lg ${isFlame ? "bg-red-100 dark:bg-red-950/50 text-red-600 dark:text-red-400" : "bg-emerald-100 dark:bg-emerald-950/50 text-emerald-600 dark:text-emerald-400"}`}>
                     {isFlame ? <Flame className="h-4 w-4" /> : <ShieldCheck className="h-4 w-4" />}
                   </div>
                 </div>

@@ -67,8 +67,8 @@ export default function PointCloudMap({ rooms, onTriggerFlame, onClearFlame }: P
 
     // 1. Generate Floor Points (Y = -35)
     // Grid pattern with some desks
-    for (let x = -90; x <= 90; x += 6) {
-      for (let z = -90; z <= 90; z += 6) {
+    for (let x = -90; x <= 90; x += 3) {
+      for (let z = -90; z <= 90; z += 3) {
         tempPoints.push({ x, y: -35, z, type: "floor" });
         
         // Add student desk shapes on top of floor
@@ -80,8 +80,8 @@ export default function PointCloudMap({ rooms, onTriggerFlame, onClearFlame }: P
             tempPoints.push({ x: x - 4, y: -25, z: z + 4, type: "desk" });
             tempPoints.push({ x: x + 4, y: -25, z: z + 4, type: "desk" });
             // Desk top surface (more densely packed)
-            for (let dx = -6; dx <= 6; dx += 1.5) {
-              for (let dz = -6; dz <= 6; dz += 1.5) {
+            for (let dx = -6; dx <= 6; dx += 1.2) {
+              for (let dz = -6; dz <= 6; dz += 1.2) {
                 tempPoints.push({ x: x + dx, y: -15, z: z + dz, type: "desk" });
               }
             }
@@ -91,15 +91,15 @@ export default function PointCloudMap({ rooms, onTriggerFlame, onClearFlame }: P
     }
 
     // 2. Generate Back Wall Points (Z = -95)
-    for (let x = -95; x <= 95; x += 5) {
-      for (let y = -35; y <= 35; y += 5) {
+    for (let x = -95; x <= 95; x += 3) {
+      for (let y = -35; y <= 35; y += 3) {
         tempPoints.push({ x, y, z: -95, type: "wall" });
       }
     }
 
     // 3. Generate Front Wall Points (Z = 95)
-    for (let x = -95; x <= 95; x += 6) {
-      for (let y = -35; y <= 35; y += 6) {
+    for (let x = -95; x <= 95; x += 3) {
+      for (let y = -35; y <= 35; y += 3) {
         // Leave a gap for the door on the bottom left
         if (!(x < -50 && y < 15)) {
           tempPoints.push({ x, y, z: 95, type: "wall" });
@@ -108,15 +108,15 @@ export default function PointCloudMap({ rooms, onTriggerFlame, onClearFlame }: P
     }
 
     // 4. Generate Left Wall Points (X = -95)
-    for (let z = -95; z <= 95; z += 6) {
-      for (let y = -35; y <= 35; y += 6) {
+    for (let z = -95; z <= 95; z += 3) {
+      for (let y = -35; y <= 35; y += 3) {
         tempPoints.push({ x: -95, y, z, type: "wall" });
       }
     }
 
     // 5. Generate Right Wall Points (X = 95, with Window gap)
-    for (let z = -95; z <= 95; z += 5) {
-      for (let y = -35; y <= 35; y += 5) {
+    for (let z = -95; z <= 95; z += 3) {
+      for (let y = -35; y <= 35; y += 3) {
         // Create window space in middle of right wall
         if (z > -40 && z < 40 && y > -10 && y < 25) {
           // Window frame points
@@ -130,10 +130,10 @@ export default function PointCloudMap({ rooms, onTriggerFlame, onClearFlame }: P
     }
 
     // 6. Door frame points at the front left
-    for (let y = -35; y <= 15; y += 2) {
+    for (let y = -35; y <= 15; y += 1.2) {
       tempPoints.push({ x: -75, y, z: 95, type: "door" });
       if (y >= 10) {
-        for (let x = -95; x <= -75; x += 2) {
+        for (let x = -95; x <= -75; x += 1.2) {
           tempPoints.push({ x, y, z: 95, type: "door" });
         }
       }
