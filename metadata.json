@@ -1,0 +1,6 @@
+{
+  "name": "IIT Anomaly Detection",
+  "description": "An IoT-Based Anomaly Detection and Fire Safety System for real-time monitoring of temperature, humidity, and fire hazards in rooms and labs.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
